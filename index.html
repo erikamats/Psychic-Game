@@ -1,0 +1,111 @@
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Psychic Game!</title>
+
+</head>
+
+<body>
+
+    <h1>The Psychic Game!</h1>
+    <h2> Guess what letter I'm thinking of?
+        <p> Press a letter (a-z) to start!</p>
+    </h2>
+
+
+    <div id="game">
+
+    </div>
+
+    <script>
+
+        // 1. Guessing random letter - set up array
+
+        var keys = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+
+     
+        var guessLeft = 9;
+
+        var userWins = 0;
+        var userLosses = 0;
+
+        var userGuessSoFar = [];
+
+        var randomGuess = keys[Math.floor(Math.random() * keys.length)];
+
+
+
+        // 2.  listen for the Action of clicking a letter- Guess
+        document.onkeyup = function (event) {
+
+            // 3.  Define event of pressed key
+            var userGuess = String.fromCharCode(event.key);
+
+
+            // 4. Print/save guess option in its own array
+                // but must no have been pressed before from keys
+
+        if (userGuessSoFar.indexOf(userGuess) < 0 && keys.indexOf(userGuess) >= 0) {
+            userGuessSoFar[userGuessSoFar.length] = userGuess;
+
+                userGuessSoFar.forEach(function(event)) {
+                    console.log()
+                }                   
+
+
+                // 5. If userGuess matches randomGuess, +1 Win Score, and let them know they won!. 
+
+                } if (userGuess == randomGuess); {
+                    userWins++;
+
+
+                // 6. if there are no more guesses left, Loss score increases by1, game over - reset all stats
+
+                } if (userGuess !== randomGuess); {
+
+                    userLosses++;
+                    userGuessSoFar = [];
+                    randomGuess = keys[Math.floor(Math.random() * keys.length)];
+                    
+
+                }
+
+                // 7. if guessLeft = 0, increase loss by 1
+                if (guessLeft === 0) {
+                    userLosses++;
+
+                    alert("Game Over - You Lost!");
+
+                    //7a. Reset score board;
+
+                    guessLeft = 9;
+                    userGuessSoFar = [];
+                    randomGuess = keys[Math.floor(Math.random() * keys.length)];
+
+                }
+
+                //Display on score board/HTML
+                var html =
+
+                    "<p><h3>Letter Guessed: " + userGuess + "</h3></p>" +
+
+                    "<p>Guesses Left: " + guessLeft + "</p>" +
+
+                    "<p>Wins: " + userWins + "</p>" +
+
+                    "<p>Losses: " + userLosses + "</p>" +
+
+                    "<p>Guesses Made So Far:  " + userGuess + "</p>";
+
+                document.querySelector("#game").innerHTML = html;
+            };
+        
+
+
+    </script>
+
+</body>
+
+</html>
